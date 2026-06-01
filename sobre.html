@@ -1,0 +1,115 @@
+<!--
+  ================================================================
+  SINTEC — Seção "Quem Somos"
+  ================================================================
+  Cole este bloco DENTRO de <main id="dashboard-view"> no index.html,
+  logo antes do fechamento </main> da dashboard (após o card do quiz).
+  ================================================================
+-->
+
+<section class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+
+    <!-- Cabeçalho clicável para expandir/recolher -->
+    <button
+        onclick="toggleAbout()"
+        class="w-full flex items-center justify-between p-5 text-left group"
+        aria-expanded="false"
+        id="about-toggle"
+    >
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-50 text-blue-600 p-2 rounded-xl border border-blue-100">
+                <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+            <span class="text-blue-900 font-bold text-lg">Quem Somos</span>
+        </div>
+        <i data-lucide="chevron-down"
+            class="w-5 h-5 text-slate-400 transition-transform duration-300"
+            id="about-chevron">
+        </i>
+    </button>
+
+    <!-- Conteúdo expansível -->
+    <div id="about-content" class="hidden px-5 pb-6 space-y-4 page-transition">
+
+        <p class="text-xs text-slate-500 font-medium leading-relaxed border-t border-slate-100 pt-4">
+            Somos um grupo de estudantes dedicados ao desenvolvimento desta
+            plataforma de treinamento técnico sobre IGBTs como parte do projeto
+            acadêmico <span class="font-bold text-slate-700">SINTEC</span>.
+        </p>
+
+        <!-- Grade de integrantes — duplique ou remova <div class="member-card"> conforme necessário -->
+        <div class="space-y-3">
+
+            <!-- Integrante 1 -->
+            <div class="flex items-center gap-4 bg-slate-50 border border-slate-100 rounded-xl p-4">
+                <!-- Avatar: substitua o gradiente por uma <img> se tiver foto -->
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-700
+                            flex items-center justify-center text-white font-black text-lg shrink-0 shadow-md">
+                    J
+                </div>
+                <div class="min-w-0">
+                    <p class="font-bold text-slate-900 text-sm leading-tight truncate">João Silva</p>
+                    <p class="text-xs text-slate-500 font-semibold mt-0.5">RA: 123456</p>
+                    <span class="inline-block mt-1.5 text-xs font-bold text-blue-600
+                                 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full">
+                        Desenvolvedor Frontend
+                    </span>
+                </div>
+            </div>
+
+            <!-- Integrante 2 -->
+            <div class="flex items-center gap-4 bg-slate-50 border border-slate-100 rounded-xl p-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-violet-400 to-violet-700
+                            flex items-center justify-center text-white font-black text-lg shrink-0 shadow-md">
+                    M
+                </div>
+                <div class="min-w-0">
+                    <p class="font-bold text-slate-900 text-sm leading-tight truncate">Maria Souza</p>
+                    <p class="text-xs text-slate-500 font-semibold mt-0.5">RA: 234567</p>
+                    <span class="inline-block mt-1.5 text-xs font-bold text-violet-600
+                                 bg-violet-50 border border-violet-100 px-2 py-0.5 rounded-full">
+                        Pesquisa de Conteúdo
+                    </span>
+                </div>
+            </div>
+
+            <!-- Integrante 3 -->
+            <div class="flex items-center gap-4 bg-slate-50 border border-slate-100 rounded-xl p-4">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-700
+                            flex items-center justify-center text-white font-black text-lg shrink-0 shadow-md">
+                    P
+                </div>
+                <div class="min-w-0">
+                    <p class="font-bold text-slate-900 text-sm leading-tight truncate">Pedro Costa</p>
+                    <p class="text-xs text-slate-500 font-semibold mt-0.5">RA: 345678</p>
+                    <span class="inline-block mt-1.5 text-xs font-bold text-emerald-600
+                                 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded-full">
+                        Design &amp; Apresentação
+                    </span>
+                </div>
+            </div>
+
+        </div><!-- fim .space-y-3 -->
+    </div><!-- fim #about-content -->
+
+</section>
+
+<!--
+  ================================================================
+  Script da seção Quem Somos
+  Cole este <script> também no final do index.html,
+  ANTES do </body> — depois do <script src="app.js"></script>
+  ================================================================
+-->
+<script>
+    function toggleAbout() {
+        const content  = document.getElementById('about-content');
+        const chevron  = document.getElementById('about-chevron');
+        const btn      = document.getElementById('about-toggle');
+        const isHidden = content.classList.contains('hidden');
+
+        content.classList.toggle('hidden', !isHidden);
+        chevron.style.transform = isHidden ? 'rotate(180deg)' : '';
+        btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    }
+</script>

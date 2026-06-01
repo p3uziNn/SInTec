@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINTEC - Avaliação de Conhecimento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <div class="max-w-md mx-auto min-h-screen bg-slate-50 pb-12 px-4">
+        
+        <header class="flex items-center justify-between py-6 border-b border-slate-200 mb-6 bg-slate-50 sticky top-0 z-10">
+            <div class="flex items-center gap-2">
+                <a href="index.html" class="bg-blue-600 text-white p-2 rounded-lg shadow-md shadow-blue-200 block">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
+                </a>
+                <span class="text-2xl font-black tracking-wider text-blue-900">SINTEC</span>
+            </div>
+            <a href="index.html" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition flex items-center gap-1">
+                <i data-lucide="home" class="w-4 h-4"></i> Painel
+            </a>
+        </header>
+
+        <main id="quiz-screen" class="space-y-6 page-transition">
+            <div class="space-y-1">
+                <h2 class="text-2xl font-black text-slate-900 leading-tight">Teste de Conhecimento</h2>
+                <p class="text-sm font-semibold text-slate-500">Responda as 15 questões sobre tecnologia IGBT</p>
+            </div>
+
+            <form id="quiz-form" class="space-y-5">
+                <div id="questions-container" class="space-y-5">
+                    </div>
+
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-lg shadow-blue-100 transition flex items-center justify-center gap-2 mt-8">
+                    <i data-lucide="check-square" class="w-5 h-5"></i> Enviar Avaliação
+                </button>
+            </form>
+        </main>
+
+        <main id="result-screen" class="hidden space-y-6 page-transition">
+            <div class="space-y-1 text-center">
+                <h2 class="text-2xl font-black text-slate-900 leading-tight">Resultado da Avaliação</h2>
+                <p id="feedback-message" class="text-sm font-bold text-emerald-600 mt-1">Parabéns! Você foi aprovado.</p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-around text-center">
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Acertos</span>
+                    <p id="score-hits" class="text-3xl font-black text-emerald-600">0</p>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Erros</span>
+                    <p id="score-errors" class="text-3xl font-black text-rose-500">0</p>
+                </div>
+                <div class="h-8 w-px bg-slate-200"></div>
+                <div>
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Aproveitamento</span>
+                    <p id="score-percent" class="text-3xl font-black text-blue-600">0%</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-4">
+                <h3 class="font-bold text-slate-900 text-center">Gráfico de Rendimento</h3>
+                <div class="w-full max-w-[240px] mx-auto aspect-square">
+                    <canvas id="yieldChart"></canvas>
+                </div>
+            </div>
+
+            <div class="space-y-3 pt-2">
+                <button onclick="window.location.reload()" class="w-full bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3.5 rounded-xl transition flex items-center justify-center gap-2">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Refazer Quiz
+                </button>
+                <a href="index.html" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl text-center block shadow-md transition">
+                    Voltar para os Módulos
+                </a>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
