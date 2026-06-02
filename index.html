@@ -1,220 +1,89 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SINTEC - Treinamento</title>
+    <title>SINTEC - Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex items-center justify-center min-h-screen p-4">
 
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
-
-    <div class="max-w-md mx-auto min-h-screen bg-slate-50 pb-12 px-4">
-
-        <header
-            class="flex items-center justify-between py-6 border-b border-slate-200 mb-6 bg-slate-50 sticky top-0 z-10">
-            <div class="flex items-center gap-2">
-                <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md shadow-blue-200">
-                    <i data-lucide="zap" class="w-6 h-6"></i>
-                </div>
-                <span class="text-2xl font-black tracking-wider text-blue-900">SINTEC</span>
+    <div class="w-full max-w-md bg-white p-8 rounded-3xl shadow-xl shadow-slate-100 border border-slate-100 space-y-6 page-transition">
+        
+        <div class="flex flex-col items-center text-center space-y-2">
+            <div class="bg-blue-600 text-white p-3 rounded-2xl shadow-md shadow-blue-200 inline-block">
+                <i data-lucide="zap" class="w-8 h-8"></i>
             </div>
-            <div class="text-sm font-medium text-slate-600">
-                Bem-vindo, <span class="font-bold text-slate-900">João Silva</span>
+            <h1 class="text-3xl font-black tracking-wider text-blue-900 pt-2">SINTEC</h1>
+            <p class="text-sm font-semibold text-slate-500">Plataforma de Treinamento Técnico</p>
+        </div>
+
+        <form id="login-form" class="space-y-4">
+            
+            <div class="space-y-1.5">
+                <label for="ra" class="text-sm font-bold text-slate-700 block">Registro Acadêmico (RA)</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </span>
+                    <input type="text" id="ra" name="ra" placeholder="Ex: 123456" required
+                        class="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-xl pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-800 placeholder-slate-400 outline-none transition">
+                </div>
             </div>
-        </header>
 
-        <main id="dashboard-view" class="space-y-4">
-
-            <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
-                <h2 class="text-lg font-bold text-slate-900 mb-4">Status do Treinamento</h2>
-                <div class="space-y-2">
-                    <div class="flex justify-between text-sm font-semibold text-slate-600">
-                        <span>Progresso Geral</span>
-                        <span id="progress-txt" class="text-blue-600 text-lg font-bold">0%</span>
-                    </div>
-                    <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                        <div id="progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-500"
-                            style="width: 0%"></div>
-                    </div>
+            <div class="space-y-1.5">
+                <label for="password" class="text-sm font-bold text-slate-700 block">Senha</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                        <i data-lucide="lock" class="w-5 h-5"></i>
+                    </span>
+                    <input type="password" id="password" name="password" placeholder="••••••••" required
+                        class="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-xl pl-11 pr-4 py-3.5 text-sm font-semibold text-slate-800 placeholder-slate-400 outline-none transition">
                 </div>
-                <span
-                    class="inline-block mt-4 bg-blue-50 text-blue-600 text-xs font-bold px-3 py-1.5 rounded-full border border-blue-100">
-                    Em Progresso
-                </span>
-            </section>
+            </div>
 
-            <section
-                class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-start justify-between">
-                <div class="space-y-1">
-                    <div class="flex items-center gap-2 text-emerald-600 font-bold text-sm">
-                        <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-                        <span>Módulos Concluídos</span>
-                    </div>
-                    <div id="modules-count" class="text-4xl font-black text-emerald-600 mt-2">0/3</div>
-                    <p id="modules-remaining" class="text-xs text-slate-500 font-medium">3 módulo(s) restante(s)</p>
-                </div>
-            </section>
+            <div id="error-message" class="hidden bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold p-3.5 rounded-xl flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+                <span>RA ou senha incorretos. Tente novamente!</span>
+            </div>
 
-            <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4">
-                <div class="text-amber-500 bg-amber-50 p-3 rounded-xl border border-amber-100">
-                    <i data-lucide="trophy" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider">Pontuação do Quiz</h3>
-                    <p id="quiz-status-text" class="text-slate-800 font-semibold mt-0.5">Não realizado ainda</p>
-                </div>
-            </section>
-
-            <section class="pt-4 space-y-4">
-                <div class="flex items-center gap-2 text-blue-900 font-bold text-lg mb-2">
-                    <i data-lucide="book-open" class="w-5 h-5 text-blue-600"></i>
-                    <h2>Módulos de Aprendizado</h2>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-4">
-                    <div class="flex items-start justify-between gap-4">
-                        <div>
-                            <h3 class="font-bold text-slate-900 leading-snug">Introdução ao IGBT</h3>
-                            <p class="text-xs text-slate-500 mt-1">Conceitos fundamentais e história do transistor
-                                bipolar de porta isolada</p>
-                        </div>
-                        <span id="check-mod-1" class="text-emerald-500 hidden"><i data-lucide="check-circle-2"
-                                class="w-5 h-5"></i></span>
-                    </div>
-                    <div class="flex items-center justify-between pt-2">
-                        <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                            <i data-lucide="play" class="w-3.5 h-3.5"></i> 12 min
-                        </span>
-                        <button id="btn-mod-1" onclick="openModule('Introdução ao IGBT', '12 min')"
-                            class="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl shadow-md shadow-blue-100 transition">
-                            Assistir <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-4">
-                    <div class="flex items-start justify-between gap-4">
-                        <div>
-                            <h3 class="font-bold text-slate-900 leading-snug">Estrutura e Funcionamento</h3>
-                            <p class="text-xs text-slate-500 mt-1">Análise detalhada da estrutura interna e princípios
-                                de operação</p>
-                        </div>
-                        <span id="check-mod-2" class="text-emerald-500 hidden"><i data-lucide="check-circle-2"
-                                class="w-5 h-5"></i></span>
-                    </div>
-                    <div class="flex items-center justify-between pt-2">
-                        <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                            <i data-lucide="play" class="w-3.5 h-3.5"></i> 18 min
-                        </span>
-                        <button id="btn-mod-2" onclick="openModule('Estrutura e Funcionamento', '18 min')"
-                            class="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl shadow-md shadow-blue-100 transition">
-                            Assistir <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-4">
-                    <div class="flex items-start justify-between gap-4">
-                        <div>
-                            <h3 class="font-bold text-slate-900 leading-snug">Aplicações Práticas</h3>
-                            <p class="text-xs text-slate-500 mt-1">Casos de uso em inversores, conversores e sistemas de
-                                potência</p>
-                        </div>
-                        <span id="check-mod-3" class="text-emerald-500 hidden"><i data-lucide="check-circle-2"
-                                class="w-5 h-5"></i></span>
-                    </div>
-                    <div class="flex items-center justify-between pt-2">
-                        <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
-                            <i data-lucide="play" class="w-3.5 h-3.5"></i> 15 min
-                        </span>
-                        <button id="btn-mod-3" onclick="openModule('Aplicações Práticas', '15 min')"
-                            class="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 rounded-xl shadow-md shadow-blue-100 transition">
-                            Assistir <i data-lucide="play" class="w-4 h-4 fill-current"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div
-                    class="bg-blue-600 text-white p-6 rounded-2xl shadow-xl shadow-blue-100 relative overflow-hidden space-y-4">
-                    <div class="absolute -right-6 -bottom-6 text-blue-500 opacity-20">
-                        <i data-lucide="trophy" class="w-32 h-32"></i>
-                    </div>
-                    <h3 class="text-2xl font-black tracking-tight">Teste Seu Conhecimento</h3>
-                    <p class="text-sm text-blue-100 leading-relaxed">
-                        Complete o quiz interativo para validar seu aprendizado. Você precisa de 80% para passar!
-                    </p>
-                    <a href="quiz.html"
-                        class="w-full bg-white text-blue-600 font-bold py-3.5 rounded-xl shadow-md hover:bg-blue-50 transition flex items-center justify-center gap-2 text-center block">
-                        Iniciar Quiz <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </section>
-        </main>
-
-        <main id="module-view" class="hidden space-y-6 page-transition">
-            <button onclick="closeModule()"
-                class="flex items-center gap-1.5 text-slate-600 font-bold text-sm hover:text-slate-900 transition">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Voltar aos Módulos
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-100 transition flex items-center justify-center gap-2 pt-4">
+                Entrar no Treinamento <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </button>
+        </form>
 
-            <div class="space-y-1">
-                <h2 id="module-title" class="text-2xl font-black text-slate-900 leading-tight">Introdução ao IGBT</h2>
-                <p id="module-duration" class="text-sm font-semibold text-slate-500">12 min</p>
-            </div>
-
-            <!-- ADICIONE O ID NA TAG IFRAME -->
-            <div class="w-full aspect-video rounded-2xl overflow-hidden shadow-lg bg-black border border-slate-200">
-                <iframe id="video-player" class="w-full h-full" src="" title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                <h3 class="font-bold text-slate-900 text-lg">Sobre este módulo</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">Conceitos fundamentais e história do transistor
-                    bipolar de porta isolada (IGBT). Entenda o funcionamento básico e a importância na eletrônica
-                    moderna.</p>
-            </div>
-
-            <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                <h3 class="font-bold text-slate-900 text-lg">Objetivos</h3>
-                <ul class="space-y-2.5 text-sm text-slate-600 font-medium">
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                        <span>Entender o que é um IGBT e sua importância na eletrônica de potência.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mt-0.5"></i>
-                        <span>Conhecer a história e evolução do dispositivo.</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="space-y-3">
-                <h3 class="font-bold text-slate-900 text-lg flex items-center gap-1.5">
-                    <i data-lucide="download" class="w-5 h-5 text-slate-500"></i> Recursos de Apoio
-                </h3>
-                <!-- ADICIONE O ID NA TAG A -->
-                <div class="space-y-2">
-                    <a id="pdf-link" href="#" download
-                        class="flex items-center justify-between bg-white p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition group">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="file-text" class="w-5 h-5 text-slate-400 group-hover:text-blue-600"></i>
-                            <span class="text-sm font-semibold text-slate-700">Datasheet Técnico</span>
-                        </div>
-                        <span class="text-xs bg-slate-100 text-slate-500 font-bold px-2 py-1 rounded">PDF</span>
-                    </a>
-                </div>
-            </div>
-        </main>
-
+        <div class="text-center pt-2">
+            <span class="text-xs text-slate-400 font-medium">Ambiente de Avaliação SINTEC &copy; 2026</span>
+        </div>
     </div>
 
-    <script src="app.js"></script>
-</body>
+    <script>
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
 
+        const form = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita o recarregamento da página
+
+            const raValue = document.getElementById('ra').value.trim();
+            const passwordValue = document.getElementById('password').value;
+
+            // CONFIGURAÇÃO DOS DADOS DE TESTE (MOCK)
+            // Deixei o RA como "123456" e senha como "123" para facilitar o teste na hora de apresentar!
+            if (raValue === "123456" && passwordValue === "123") {
+                errorMessage.classList.add('hidden');
+                
+                // Redireciona para a Dashboard principal
+                window.location.href = "../html/dashboard.html";
+            } else {
+                // Mostra a mensagem de erro estilizada
+                errorMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
 </html>
